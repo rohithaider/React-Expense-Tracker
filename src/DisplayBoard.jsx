@@ -6,10 +6,12 @@ import TotalBalance from "./TotalBalance";
 import {useEffect} from 'react'
 export default function DisplayBoard() {
     const [data,setData] = useState({'balance':0,'income':0,'expense':0,'formType':"expense"})
+    const [incomeList, setIncomeList]=useState([])
+    const [expenseList, setExpenseList]=useState([])
     
     function handleOnSave(formData){
         let newBalance = data.balance;
-        console.log(newBalance)
+        
 
         
         if(formData.formType==='expense'){
@@ -25,6 +27,13 @@ export default function DisplayBoard() {
                 formType: formData.formType
             }));
 
+            setExpenseList(prevList=>[...prevList,{
+                expense: expense,
+                category: formData.category,
+                date:formData.date,
+                id:formData.id
+            }])
+
         }
         else{
             const income = parseInt(formData.amount)
@@ -38,6 +47,13 @@ export default function DisplayBoard() {
                 formType: formData.formType
             }));
 
+            setIncomeList(prevList=>[...prevList,{
+                income: income,
+                category: formData.category,
+                date:formData.date,
+                id:formData.id
+            }])
+            
         }
         
         
@@ -45,8 +61,9 @@ export default function DisplayBoard() {
     }
     
      useEffect(() => {
-        console.log(data); // Logs the data after the state has been updated
-    }, [data]); 
+        console.log(incomeList)
+         // Logs the data after the state has been updated
+    }, [incomeList]); 
 
   return (
     <main className="relative mx-auto mt-10 w-full max-w-7xl">
@@ -56,8 +73,8 @@ export default function DisplayBoard() {
         <div className="lg:col-span-2">
           <TotalBalance data={data}/>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8">
-            <Income/>
-            <Expense/>
+            <Income incomeData={incomeList}/>
+            <Expense expenseData={expenseList}/>
           </div>
         </div>
       </section>
