@@ -1,6 +1,6 @@
 import { useState } from "react";
 export default function Income({ incomeData }) {
-  console.log(incomeData)
+  console.log(incomeData);
   const [showSortMenu, setShowSortMenu] = useState(false);
   const [showFilterMenu, setShowFilterMenu] = useState(false);
   return (
@@ -192,12 +192,21 @@ export default function Income({ incomeData }) {
                 <!-- Row --> */}
         {incomeData.map((income) => {
           return (
-            <div key={income.id} className="flex justify-between items-center py-2 relative group cursor-pointer">
+            <div
+              key={income.id}
+              className="flex justify-between items-center py-2 relative group cursor-pointer"
+            >
               <div>
                 <h3 className="text-base font-medium leading-7 text-gray-600">
                   {income.category}
                 </h3>
-                <p className="text-xs text-gray-600">{income.date}</p>
+                <p className="text-xs text-gray-600">
+                  {new Date(income.date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
               </div>
               <div className="flex items-center gap-2">
                 <p className="text-base font-semibold text-gray-600 transition-all group-hover:-translate-x-14">
