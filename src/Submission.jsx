@@ -1,8 +1,38 @@
 import {useState} from 'react'
-export default function Submission() {
+export default function Submission({onSave}) {
+    const [formInput,setFormInput]=useState({
+        id: crypto.randomUUID(),
+        category:"",
+        amount:"",
+        date:""
+    })
     const [formType, setFormType] = useState("expense")
     function handleFormChange(formType){
         setFormType(formType)
+    }
+
+    function handleInputChange(e){
+        const name = e.target.name;
+        let value = e.target.value;
+        setFormInput(
+            {
+                ...formInput,
+                [name]:value,
+            }
+        )
+
+    }
+    function handleSave(e){
+        e.preventDefault();
+        onSave({...formInput,formType})
+        setFormInput({
+            id: crypto.randomUUID(),  // Ensure you get a new ID for each submission
+            category: "",
+            amount: "",
+            date: ""
+        });
+        
+
     }
 
 
@@ -39,6 +69,8 @@ export default function Submission() {
             {formType === "expense"?<select
               id="category"
               name="category"
+              value={formInput.category}
+              onChange={handleInputChange}
               autoComplete="category-name"
               className=" block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
             >
@@ -77,6 +109,8 @@ export default function Submission() {
               type="number"
               name="amount"
               id="amount"
+              value={formInput.amount}
+              onChange={handleInputChange}
               autoComplete="off"
               placeholder="12931"
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
@@ -96,6 +130,8 @@ export default function Submission() {
               type="date"
               name="date"
               id="date"
+              value={formInput.date}
+              onChange={handleInputChange}
               autoComplete="off"
               placeholder="12931"
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
@@ -104,7 +140,8 @@ export default function Submission() {
         </div>
 
         <button
-          type="submit"
+            onClick={handleSave}
+            type="submit"
           className="mt-6 rounded-md bg-teal-600 px-8 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 w-full"
         >
           Save

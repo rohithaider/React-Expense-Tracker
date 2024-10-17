@@ -1,5 +1,5 @@
 import {useState} from 'react'
-export default function Expense(){
+export default function Income(){
     const [showSortMenu, setShowSortMenu] = useState(false);
     const [showFilterMenu, setShowFilterMenu] = useState(false);
     return (
