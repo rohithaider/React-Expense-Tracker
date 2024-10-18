@@ -1,8 +1,28 @@
 import { useState } from "react";
-export default function Income({ incomeData }) {
-  console.log(incomeData);
+export default function Income({ incomeData,showSortIncome }) {
+  
   const [showSortMenu, setShowSortMenu] = useState(false);
   const [showFilterMenu, setShowFilterMenu] = useState(false);
+
+  function handleSort(sortOrder){
+   
+    let sortData = [...incomeData]
+
+    if(sortOrder ==="lowToHigh"){
+      sortData.sort((a,b)=>a.income-b.income)
+      
+    }else if(sortOrder ==="highToLow"){
+      sortData.sort((a,b)=>b.income-a.income)
+      
+    }
+    showSortIncome(sortData);
+    setShowSortMenu(!showSortMenu)
+
+  }
+
+
+
+
   return (
     <div className="border rounded-md relative">
       {/* <!-- Header --> */}
@@ -83,6 +103,7 @@ export default function Income({ incomeData }) {
                     role="menuitem"
                     tabIndex="-1"
                     id="menu-item-0"
+                    onClick={()=>handleSort("lowToHigh")}
                   >
                     Low to High
                   </a>
@@ -92,6 +113,7 @@ export default function Income({ incomeData }) {
                     role="menuitem"
                     tabIndex="-1"
                     id="menu-item-0"
+                    onClick={()=>handleSort("highToLow")}
                   >
                     High to Low
                   </a>

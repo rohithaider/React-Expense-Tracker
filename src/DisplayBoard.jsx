@@ -61,9 +61,18 @@ export default function DisplayBoard() {
     }
     
      useEffect(() => {
-        console.log(incomeList)
+        // console.log(incomeList)
          // Logs the data after the state has been updated
     }, [incomeList]); 
+
+
+
+    function handleShowSortIncome(income){
+      setIncomeList(income)
+    }
+    function handleShowSortExpense(expense){
+      setExpenseList(expense)
+    }
 
   return (
     <main className="relative mx-auto mt-10 w-full max-w-7xl">
@@ -73,8 +82,8 @@ export default function DisplayBoard() {
         <div className="lg:col-span-2">
           <TotalBalance data={data}/>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8">
-            <Income incomeData={incomeList}/>
-            <Expense expenseData={expenseList}/>
+            <Income incomeData={incomeList} showSortIncome={handleShowSortIncome}/>
+            <Expense expenseData={expenseList} showSortExpense={handleShowSortExpense}/>
           </div>
         </div>
       </section>

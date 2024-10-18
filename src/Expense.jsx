@@ -1,7 +1,30 @@
 import { useState } from "react";
-export default function Expense({ expenseData }) {
+export default function Expense({ expenseData,showSortExpense }) {
   const [showSortMenu, setShowSortMenu] = useState(false);
   const [showFilterMenu, setShowFilterMenu] = useState(false);
+
+  function handleSort(sortOrder){
+   
+    let sortData = [...expenseData]
+    
+
+    if(sortOrder ==="lowToHigh"){
+      sortData.sort((a,b)=>a.expense-b.expense)
+     
+      
+      
+    }else if(sortOrder ==="highToLow"){
+      sortData.sort((a,b)=>b.expense-a.expense)
+      
+      
+    }
+    showSortExpense(sortData);
+    setShowSortMenu(!showSortMenu)
+
+  }
+
+
+
 
   return (
     <div className="border rounded-md">
@@ -87,6 +110,7 @@ export default function Expense({ expenseData }) {
                     role="menuitem"
                     tabIndex="-1"
                     id="menu-item-0"
+                    onClick={()=>handleSort("lowToHigh")}
                   >
                     Low to High
                   </a>
@@ -96,6 +120,7 @@ export default function Expense({ expenseData }) {
                     role="menuitem"
                     tabIndex="-1"
                     id="menu-item-0"
+                    onClick={()=>handleSort("highToLow")}
                   >
                     High to Low
                   </a>
