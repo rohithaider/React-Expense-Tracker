@@ -1,5 +1,5 @@
 import { useState } from "react";
-export default function Income({ incomeData,showSortIncome, onDelete }) {
+export default function Income({ incomeData,showSortIncome, onDelete,onEdit }) {
 
 
   
@@ -243,6 +243,7 @@ export default function Income({ incomeData,showSortIncome, onDelete }) {
                     className="hover:text-teal-600"
                     role="button"
                     title="Edit Button"
+                    onClick={()=> onEdit(income)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

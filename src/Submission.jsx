@@ -1,12 +1,5 @@
-import { useState } from "react";
-export default function Submission({ onSave }) {
-  const [formInput, setFormInput] = useState({
-    id: crypto.randomUUID(),
-    category: "",
-    amount: "",
-    date: "",
-  });
-  const [formType, setFormType] = useState("expense");
+export default function Submission({ onSave, formInput,setFormInput, formType, setFormType}) {
+  
   function handleFormChange(formType) {
     setFormType(formType);
   }

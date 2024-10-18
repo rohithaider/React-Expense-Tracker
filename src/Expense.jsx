@@ -1,5 +1,5 @@
 import { useState } from "react";
-export default function Expense({ expenseData,showSortExpense, onDelete }) {
+export default function Expense({ expenseData,showSortExpense, onDelete, onEdit }) {
   const [showSortMenu, setShowSortMenu] = useState(false);
   const [showFilterMenu, setShowFilterMenu] = useState(false);
 
@@ -238,6 +238,7 @@ export default function Expense({ expenseData,showSortExpense, onDelete }) {
                     className="hover:text-teal-600"
                     role="button"
                     title="Edit Button"
+                    onClick={()=>onEdit(expense)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
