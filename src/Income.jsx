@@ -5,6 +5,8 @@ export default function Income({ incomeData,showSortIncome, onDelete,onEdit }) {
   
   const [showSortMenu, setShowSortMenu] = useState(false);
   const [showFilterMenu, setShowFilterMenu] = useState(false);
+  
+
 
   function handleSort(sortOrder){
    
@@ -21,6 +23,8 @@ export default function Income({ incomeData,showSortIncome, onDelete,onEdit }) {
     setShowSortMenu(!showSortMenu)
 
   }
+
+
 
 
 
@@ -176,6 +180,7 @@ export default function Income({ incomeData,showSortIncome, onDelete,onEdit }) {
                       type="checkbox"
                       className="form-checkbox h-4 w-4 rounded-md text-gray-600"
                       id="filter-option-1"
+                   
                     />
                     <span className="ml-2">Salary</span>
                   </label>
@@ -184,6 +189,7 @@ export default function Income({ incomeData,showSortIncome, onDelete,onEdit }) {
                       type="checkbox"
                       className="form-checkbox h-4 w-4 rounded-md text-gray-600"
                       id="filter-option-2"
+                     
                     />
                     <span className="ml-2">Outsourcing</span>
                   </label>
@@ -192,6 +198,7 @@ export default function Income({ incomeData,showSortIncome, onDelete,onEdit }) {
                       type="checkbox"
                       className="form-checkbox h-4 w-4 rounded-md text-gray-600"
                       id="filter-option-3"
+                     
                     />
                     <span className="ml-2">Bond</span>
                   </label>
@@ -201,6 +208,7 @@ export default function Income({ incomeData,showSortIncome, onDelete,onEdit }) {
                       type="checkbox"
                       className="form-checkbox h-4 w-4 rounded-md text-gray-600"
                       id="filter-option-3"
+                   
                     />
                     <span className="ml-2">Dividend</span>
                   </label>

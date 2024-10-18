@@ -184,6 +184,7 @@ export default function DisplayBoard() {
               showSortIncome={handleShowSortIncome}
               onDelete={handleIncomeDelete}
               onEdit={handleIncomeEdit}
+              setIncome={setIncomeList}
             />
             <Expense
               expenseData={expenseList}
