@@ -60,18 +60,61 @@ export default function DisplayBoard() {
         
     }
     
-     useEffect(() => {
-        // console.log(incomeList)
-         // Logs the data after the state has been updated
-    }, [incomeList]); 
-
-
-
     function handleShowSortIncome(income){
       setIncomeList(income)
     }
     function handleShowSortExpense(expense){
       setExpenseList(expense)
+    }
+
+    function handleIncomeDelete(incomingList){ 
+      const newIncomeList = [...incomeList]
+      const newIncome = incomingList.income
+      const balance = data.balance
+      const income = data.income
+      let updatedBalance = balance-newIncome
+      let updatedIncome = income-newIncome
+
+      
+      const updatedList = newIncomeList.filter((income)=>income.id !== incomingList.id )
+      setIncomeList(updatedList)
+
+
+      setData(data => ({
+        ...data,
+        balance: updatedBalance,
+        income:updatedIncome
+        
+    }));
+
+    }
+
+    function handleExpenseDelete(incomingExpense){
+      console.log(incomingExpense)
+      const newExpenseList = [...expenseList]
+      const newExpense = incomingExpense.expense
+      const balance = data.balance
+      const expense = data.expense
+
+      let updatedBalance = balance+newExpense
+      let updatedExpense = expense-newExpense
+      
+      console.log(updatedBalance,updatedExpense)
+
+    
+      const updatedList = newExpenseList.filter((expense)=>expense.id !== incomingExpense.id )
+      
+      setExpenseList(updatedList)
+
+
+      setData(data => ({
+        ...data,
+        balance: updatedBalance,
+        expense:updatedExpense
+        
+    }));
+    
+
     }
 
   return (
@@ -82,8 +125,8 @@ export default function DisplayBoard() {
         <div className="lg:col-span-2">
           <TotalBalance data={data}/>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8">
-            <Income incomeData={incomeList} showSortIncome={handleShowSortIncome}/>
-            <Expense expenseData={expenseList} showSortExpense={handleShowSortExpense}/>
+            <Income incomeData={incomeList} showSortIncome={handleShowSortIncome} onDelete={handleIncomeDelete}/>
+            <Expense expenseData={expenseList} showSortExpense={handleShowSortExpense} onDelete={handleExpenseDelete}/>
           </div>
         </div>
       </section>
